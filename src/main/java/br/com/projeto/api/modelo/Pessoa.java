@@ -33,4 +33,11 @@ public class Pessoa {
         this.idade = idade;
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 }
