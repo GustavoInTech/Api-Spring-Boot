@@ -3,6 +3,8 @@ package br.com.projeto.api.controle;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +49,46 @@ public class Controle {
         acao.delete(obj);
     }
 
+    @GetMapping("/api/contador")
+    public long contador() {
+        return acao.count();
+    }
+
+    @GetMapping("/api/ordenarNomes")
+    public List<Pessoa> ordenarNomes() {
+        return acao.findByOrderByNomeDesc();
+    }
+
+    @GetMapping("/api/ordenarNomes2")
+    public List<Pessoa> ordenarNomes2() {
+        return acao.findByOrderByIdadeDesc("Gustavo");
+    }
+
+    @GetMapping("/api/nomeContem")
+    public List<Pessoa> nomeContem() {
+        return acao.findByNomeContaining("l");
+    }
+
+    @GetMapping("/api/iniciaCom")
+    public List<Pessoa> iniciaCom() {
+        return acao.findByNomeStartsWith("a");
+    }
+
+    @GetMapping("/api/terminaCom")
+    public List<Pessoa> terminaCom() {
+        return acao.findByNomeEndsWith("a");
+    }
+
+    @GetMapping("/api/somaIdades")
+    public int somaIdades() {
+        return acao.somaIdades();
+    }
+
+    @GetMapping("/api/idadeMaiorIgual")
+    public List<Pessoa> idadeMaiorIgual() {
+        return acao.idadeMaiorIgual(18);
+    }
+
     @GetMapping("")
     public String menssagem() {
         return "Hello World!";
@@ -66,5 +108,10 @@ public class Controle {
     public Pessoa pessoa(@RequestBody Pessoa p) {
 
         return p;
+    }
+
+    @GetMapping("/status")
+    public String status() {
+        return "Configurando status";
     }
 }
